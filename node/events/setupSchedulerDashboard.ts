@@ -55,8 +55,20 @@ const setupSchedulerDashboard = async (ctx: EventContext<Clients>) => {
         Authorization: `Bearer ${bearerToken}`,
       }
 
+      const schedulerPingRequest: SchedulerRequest = schedulerTemplate
+      schedulerPingRequest.id = 'dashboard-ping'
+      schedulerPingRequest.request.uri = `https://${ctx.vtex.workspace}--${ctx.vtex.account}.myvtex.com/_v/ping`
+      schedulerPingRequest.request.method = 'POST'
+      schedulerPingRequest.request.headers = {
+        'cache-control': 'no-store',
+        pragma: 'no-store'
+      }
+      schedulerPingRequest.scheduler.expression = '*/1 * * * *'
+      schedulerPingRequest.scheduler.endDate = '2100-01-01T23:30:00'
+
       try {
         await scheduler.setInitialScheduler(appName, schedulerRequest)
+        await scheduler.setInitialScheduler(appName, schedulerPingRequest)
         logger.info({
           message: 'setupScheduler-setDashboardGenerate',
         })

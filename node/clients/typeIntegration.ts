@@ -2,11 +2,11 @@ import type { InstanceOptions, IOContext } from '@vtex/api'
 import { AppClient } from '@vtex/api'
 
 export default class TypeIntegration extends AppClient {
-  private baseURL = `http://app.io.vtex.com/vtex.marketplace-financial-commission/v0/${this.context.account}/${this.context.workspace}`
+  private baseURL = `http://app.io.vtex.com/itglobers.marketplace-financial-commission/v0/${this.context.account}/${this.context.workspace}`
 
   constructor(context: IOContext, options?: InstanceOptions) {
     // TODO: update the app version
-    super('vtex.marketplace-financial-commission@0.x', context, options)
+    super('itglobers.marketplace-financial-commission@0.x', context, options)
   }
 
   private getTypeIntegration = async (route: string) => {
